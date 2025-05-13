@@ -95,14 +95,14 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center group-hover:bg-accent transition-all duration-300">
                   <Phone size={16} className="text-accent group-hover:text-white" />
                 </div>
-                <span className="group-hover:text-accent transition-colors">+57 300 123 4567</span>
+                <span className="group-hover:text-accent transition-colors">+57 302 683 6359</span>
               </div>
               
               <div className="flex items-center space-x-3 group">
                 <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center group-hover:bg-accent transition-all duration-300">
                   <Mail size={16} className="text-accent group-hover:text-white" />
                 </div>
-                <span className="group-hover:text-accent transition-colors">info@lmaceros.com</span>
+                <span className="group-hover:text-accent transition-colors">leidermorales@gmail.com</span>
               </div>
               
               <div className="flex items-center space-x-3 group">

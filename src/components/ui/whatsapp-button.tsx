@@ -59,7 +59,7 @@ export default function WhatsappButton() {
   return (
     <a
       ref={buttonRef}
-      href="https://wa.me/573122456789?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20sus%20servicios"
+      href="https://wa.me/573026836359?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20sus%20servicios"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-24 right-8 w-16 h-16 bg-[#25D366] text-white rounded-full flex justify-center items-center text-3xl shadow-metal z-50 transition-all duration-300 hover:shadow-metal-strong"
