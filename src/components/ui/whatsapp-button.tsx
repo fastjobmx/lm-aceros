@@ -1,75 +1,99 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { motion, useAnimation } from 'framer-motion'
+import { FaWhatsapp } from 'react-icons/fa'
+import { useEffect } from 'react'
 
-export default function WhatsappButton() {
-  const buttonRef = useRef<HTMLAnchorElement>(null)
-  
+export default function WhatsAppButton() {
+  const controls = useAnimation()
+
   useEffect(() => {
-    const button = buttonRef.current
-    if (!button) return
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = button.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      
-      const centerX = rect.width / 2
-      const centerY = rect.height / 2
-      const deltaX = (x - centerX) / centerX
-      const deltaY = (y - centerY) / centerY
-      
-      button.style.transform = `scale(1.1) perspective(500px) rotateX(${deltaY * 5}deg) rotateY(${deltaX * -5}deg)`
-      
-      const icon = button.querySelector('i')
-      if (icon) {
-        icon.style.textShadow = `${deltaX * -5}px ${deltaY * -5}px 5px rgba(255,255,255,0.5)`
-      }
-    }
-    
-    const handleMouseLeave = () => {
-      button.style.transform = 'scale(1)'
-      const icon = button.querySelector('i')
-      if (icon) {
-        icon.style.textShadow = 'none'
-      }
-    }
-    
-    const handleMouseDown = () => {
-      button.style.transform = 'scale(0.95)'
-    }
-    
-    const handleMouseUp = () => {
-      button.style.transform = 'scale(1.1)'
-    }
-    
-    button.addEventListener('mousemove', handleMouseMove)
-    button.addEventListener('mouseleave', handleMouseLeave)
-    button.addEventListener('mousedown', handleMouseDown)
-    button.addEventListener('mouseup', handleMouseUp)
-    
-    return () => {
-      button.removeEventListener('mousemove', handleMouseMove)
-      button.removeEventListener('mouseleave', handleMouseLeave)
-      button.removeEventListener('mousedown', handleMouseDown)
-      button.removeEventListener('mouseup', handleMouseUp)
-    }
-  }, [])
-  
+    const interval = setInterval(() => {
+      controls.start({
+        scale: [1, 1.2, 1],
+        rotate: [0, 5, -5, 0],
+        transition: {
+          duration: 2,
+          ease: "easeInOut"
+        }
+      })
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [controls])
+
   return (
-    <a
-      ref={buttonRef}
-      href="https://wa.me/573026836359?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20sus%20servicios"
+    <motion.a
+      href="https://wa.me/573026836359"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-24 right-8 w-16 h-16 bg-[#25D366] text-white rounded-full flex justify-center items-center text-3xl shadow-metal z-50 transition-all duration-300 hover:shadow-metal-strong"
-      aria-label="Contactar por WhatsApp"
+      className="fixed bottom-8 right-8 z-50 group"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.1, rotate: 5 }}
+      whileTap={{ scale: 0.9 }}
+      transition={{ duration: 0.3 }}
     >
-      <i className="fab fa-whatsapp"></i>
-      
-      <div className="absolute -top-2 -right-2 w-5 h-5 bg-accent rounded-full animate-pulse-slow"></div>
-      
-      <div className="absolute w-full h-full rounded-full bg-[#25D366] animate-ping opacity-25"></div>
-    </a>
+      <div className="relative">
+        {/* Efecto de pulso múltiple */}
+        {[...Array(3)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute inset-0 bg-accent rounded-full"
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.5, 0, 0.5],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+        
+        {/* Botón principal con efecto de brillo */}
+        <motion.div 
+          className="relative bg-gradient-to-r from-accent to-accent-alt p-4 rounded-full shadow-lg 
+            hover:shadow-xl transition-all duration-300 group-hover:shadow-accent/50 overflow-hidden"
+          animate={controls}
+        >
+          {/* Efecto de brillo */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+            translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+          
+          <FaWhatsapp className="text-white text-2xl relative z-10" />
+        </motion.div>
+
+        {/* Tooltip mejorado */}
+        <motion.div 
+          className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-neutral-dark/90 backdrop-blur-sm 
+            text-white px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 
+            pointer-events-none shadow-lg border border-accent/20"
+          initial={{ x: 20, opacity: 0 }}
+          whileHover={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="relative">
+            <span className="text-sm whitespace-nowrap font-medium">¡Contáctanos!</span>
+            <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-0 h-0 
+              border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent 
+              border-l-[8px] border-l-neutral-dark/90" />
+          </div>
+        </motion.div>
+
+        {/* Contador de mensajes */}
+        <motion.div 
+          className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold 
+            w-5 h-5 rounded-full flex items-center justify-center"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 1 }}
+        >
+          3
+        </motion.div>
+      </div>
+    </motion.a>
   )
 }

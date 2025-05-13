@@ -29,7 +29,7 @@ export default function ProjectsCarousel3D() {
       description: 'Construcción de estructura metálica con diseño a dos aguas en terreno montañoso',
       image: '/images/projects/project-taller-01.png',
       location: 'Zona Montañosa',
-      year: '2023'
+      year: '2024'
     },
     {
       id: 3,
@@ -37,7 +37,7 @@ export default function ProjectsCarousel3D() {
       description: 'Instalación de estructura metálica rectangular para pérgola exterior',
       image: '/images/projects/project-taller-02.png',
       location: 'Residencia Privada',
-      year: '2023'
+      year: '2025'
     },
     {
       id: 4,
@@ -45,7 +45,7 @@ export default function ProjectsCarousel3D() {
       description: 'Diseño y fabricación de escalera metálica para edificio residencial',
       image: '/images/projects/proyecto-taller-04.png',
       location: 'Manizales',
-      year: '2022'
+      year: '2025'
     },
     {
       id: 5,
@@ -53,7 +53,7 @@ export default function ProjectsCarousel3D() {
       description: 'Instalación de baranda de acero inoxidable en centro comercial',
       image: '/images/projects/proyecto-taller-05.png',
       location: 'Armenia',
-      year: '2023'
+      year: '2026'
     },
     {
       id: 6,
@@ -61,7 +61,7 @@ export default function ProjectsCarousel3D() {
       description: 'Construcción de puente peatonal con estructura metálica reforzada',
       image: '/images/projects/proyecto-taller-06.png',
       location: 'Pereira',
-      year: '2021'
+      year: '2026'
     },
     {
       id: 7,
@@ -69,7 +69,7 @@ export default function ProjectsCarousel3D() {
       description: 'Montaje de cubierta metálica para nave industrial',
       image: '/images/projects/proyecto-taller-07.png',
       location: 'Cali',
-      year: '2022'
+      year: '2027'
     }
   ];
 
@@ -120,36 +120,35 @@ export default function ProjectsCarousel3D() {
             return (
               <motion.div
                 key={project.id}
-                className={`absolute w-full max-w-md rounded-xl overflow-hidden shadow-2xl transition-all duration-500 border border-white/20 ${offset === 0 ? 'z-30' : 'z-10'}`}
+                className={`absolute w-full max-w-md rounded-xl overflow-hidden shadow-2xl card-shine glass-effect hover-lift transition-all duration-500 border border-white/20 ${offset === 0 ? 'z-30 scale-105' : 'z-10 scale-95'}`}
                 initial={{ opacity: 0, x: offset * 100, scale: offset === 0 ? 1 : 0.8, rotateY: offset * 15 }}
                 animate={{ 
                   opacity: offset === 0 ? 1 : 0.7,
                   x: offset * 300, 
-                  scale: offset === 0 ? 1 : 0.8,
+                  scale: offset === 0 ? 1.05 : 0.95,
                   rotateY: offset * 15,
-                  filter: offset === 0 ? 'brightness(1)' : 'brightness(0.7)'
+                  filter: offset === 0 ? 'brightness(1.1)' : 'brightness(0.7) blur(1px)'
                 }}
                 transition={{ duration: 0.5 }}
-                style={{ perspective: '1000px' }}
+                style={{ perspective: '1200px' }}
               >
                 <div className="relative aspect-video bg-neutral-medium group">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    className="w-full h-72 object-cover transition-all duration-500 group-hover:scale-105" 
+                    className="w-full h-72 object-cover transition-all duration-500 group-hover:scale-110 img-hover" 
                   />
-                  
                   {/* Overlay glassmorphism animado */}
                   <motion.div
-                    className="absolute inset-0 bg-black/50 backdrop-blur-sm flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 p-6"
+                    className="absolute inset-0 bg-black/50 backdrop-blur-md flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 p-6"
                     initial={{ opacity: 0 }}
                     whileHover={{ opacity: 1 }}
                   >
-                    <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg text-center">{project.title}</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg text-center text-gradient text-shadow">{project.title}</h3>
                     <p className="text-neutral-pale mb-4 text-center max-w-xs drop-shadow-lg">{project.description}</p>
                     {offset === 0 && (
                       <motion.button
-                        className="btn px-6 py-2 rounded-full text-white bg-accent hover:bg-accent/80 shadow-lg flex items-center gap-2 transition-all"
+                        className="btn-modern px-6 py-2 rounded-full text-white bg-accent hover:bg-accent/80 shadow-lg flex items-center gap-2 transition-all"
                         whileTap={{ scale: 0.95 }}
                         onClick={() => setSelectedProject(project)}
                       >
@@ -157,7 +156,6 @@ export default function ProjectsCarousel3D() {
                       </motion.button>
                     )}
                   </motion.div>
-                  
                   <div className="p-5 w-full z-0">
                     <span className="block text-xs text-accent mb-1 text-center">
                       {project.location}, {project.year}
@@ -167,31 +165,28 @@ export default function ProjectsCarousel3D() {
               </motion.div>
             );
           })}
-          
           {/* Botones de navegación */}
           <button 
             onClick={prevProject}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-accent hover:bg-accent/80 text-white w-12 h-12 rounded-full flex items-center justify-center transition-colors z-40"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-gradient-to-br from-accent to-accent-alt hover:from-accent-alt hover:to-accent text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 z-40 hover:scale-110"
             aria-label="Proyecto anterior"
             disabled={isAnimating}
           >
             <FaChevronLeft className="text-lg" />
           </button>
-          
           <button 
             onClick={nextProject}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-accent hover:bg-accent/80 text-white w-12 h-12 rounded-full flex items-center justify-center transition-colors z-40"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-gradient-to-br from-accent to-accent-alt hover:from-accent-alt hover:to-accent text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 z-40 hover:scale-110"
             aria-label="Proyecto siguiente"
             disabled={isAnimating}
           >
             <FaChevronRight className="text-lg" />
           </button>
         </div>
-        
-        {/* Indicadores */}
+        {/* Indicadores animados */}
         <div className="flex justify-center mt-8 space-x-2">
           {projects.map((_, index) => (
-            <button
+            <motion.button
               key={index}
               onClick={() => {
                 if (!isAnimating) {
@@ -200,9 +195,10 @@ export default function ProjectsCarousel3D() {
                   setTimeout(() => setIsAnimating(false), 500);
                 }
               }}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-accent w-6' : 'bg-neutral-pale'}`}
-              aria-label={`Ver proyecto ${index + 1}`}
-              disabled={isAnimating}
+              className={`w-4 h-4 rounded-full border-2 border-accent transition-all duration-300 ${currentIndex === index ? 'bg-accent scale-125 shadow-lg' : 'bg-neutral-medium'}`}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label={`Ir al proyecto ${index + 1}`}
             />
           ))}
         </div>
