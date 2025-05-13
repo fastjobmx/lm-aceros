@@ -82,39 +82,26 @@ export default function Hero() {
               de Acero Inoxidable
             </span>
           </h1>
-          
-          <motion.p 
-            className="text-xl md:text-2xl mb-10 text-shadow max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <p className="text-xl md:text-2xl mb-10 text-shadow max-w-2xl mx-auto">
             Precisión, resistencia y acabado de alto nivel en cada proyecto
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a 
-              href="#contacto" 
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white font-bold rounded-lg shadow-metal hover:shadow-metal-strong transition-all duration-300 transform hover:scale-105 text-lg"
+              href="#contacto"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white font-bold rounded-full shadow-metal hover:shadow-metal-strong transition-all duration-300 transform hover:scale-105 text-lg"
             >
               Solicita tu cotización
               <FaArrowDown className="group-hover:translate-y-1 transition-transform duration-300" />
             </a>
             <a 
               href="#servicios" 
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold rounded-lg border border-white/20 hover:border-white/40 transition-all duration-300 transform hover:scale-105 text-lg"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold rounded-full border border-white/20 hover:border-white/40 transition-all duration-300 transform hover:scale-105 text-lg"
             >
               Nuestros Servicios
             </a>
-          </motion.div>
+          </div>
         </motion.div>
       </motion.div>
-
       {/* Indicador de scroll mejorado */}
       <motion.div 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-[2]"
@@ -127,5 +114,5 @@ export default function Hero() {
         </div>
       </motion.div>
     </section>
-  )
+  );
 }
