@@ -8,6 +8,7 @@ import Footer from './components/footer/footer'
 import WhatsappButton from './components/ui/whatsapp-button'
 import BackToTop from './components/ui/back-to-top'
 import Preloader from './components/ui/preloader'
+import ProductGallery from './components/ProductGallery'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <main id="main-content">
         <Services />
         <Projects />
+        <ProductGallery />
         <Statistics />
         <About />
         <Contact />
